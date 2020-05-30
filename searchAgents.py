@@ -345,6 +345,8 @@ class CornersProblem(search.SearchProblem):
                 # print('--------------------------------------')
                 successors.append(  ((nextPosition, cornersList), action, 1) )
         self._expanded += 1 # DO NOT CHANGE
+        # print(successors)
+        # print('==============================')
         return successors
 
     def getCostOfActions(self, actions):
@@ -480,14 +482,17 @@ def foodHeuristic(state, problem):
     Subsequent calls to this heuristic can access
     problem.heuristicInfo['wallCount']
     """
-    util.raiseNotDefined()
+
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
     distances = [0]
     if foodGrid.asList():
         for food in foodGrid.asList():
-            distances.append(mazeDistance(position, food, problem.startingGameState))
-
+            distances.append(mazeDistance(position, food, problem.startingGameState))   # mazeDistance function predefined below
+            # print(distances)
+            # print('-----')
+            # print(max(distances))
+            # print('===========================================')
     return max(distances)
 
 class ClosestDotSearchAgent(SearchAgent):
@@ -519,26 +524,8 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***"
-        # x, y = startPosition
-        # path = []
-
-        # mind = 99999
-        # mfx = 99999
-        # mfy = 99999
-
-        # for idx, fx in enumerate(food):
-        #     for idy, fy in enumerate(fx):
-        #         if food[idx][idy]:
-        #             md = mazeDistance((x,y), (idx,idy), gameState)
-        #             if md < mind:
-        #                 mfx = idx
-        #                 mfy = idy
-        #                 mind = md
-
-        # prob = PositionSearchProblem(gameState, start=(x,y), goal=(mfx,mfy), warn=False, visualize=False)
 
         return search.bfs(problem)
-        util.raiseNotDefined()
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
